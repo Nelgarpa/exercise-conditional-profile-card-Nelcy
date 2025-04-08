@@ -30,20 +30,26 @@ function render(variables = {}) {
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
-  document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </div>
-    `;
+  document.querySelector("#widget_content").innerHTML = `
+  <div class="widget">
+    ${cover}
+    <img src="${variables.avatarURL}" class="photo" />
+    <h1>${variables.name || "Nelcy"} ${variables.lastName || "García"}</h1>
+    <h2>${variables.role || "Web developer"}</h2>
+    <h3>${variables.city || "San Cristobal"}, ${variables.country || ""}</h3>
+    <h3>${variables.country || "Venezuela"}, ${variables.country || ""}</h3>
+    <ul class="${variables.socialMediaPosition}">
+      <li><a href="https://twitter.com/${variables.twitter ||
+        "frontendmentor"}" target="_blank"><i class="fa-brands fa-x-twitter" style="color: #3c6dc3;"></i>
+      <li><a href="https://github.com/${variables.github ||
+        "Nelgarpa"}" target="_blank"><i class="fa-brands fa-github" style="color: #3c6dc3;"></i>
+      <li><a href="https://linkedin.com/${variables.linkedin ||
+        "/in/nelcy-garc%C3%ADa-/"}" target="_blank"><i class="fa-brands fa-linkedin" style="color: #3c6dc3;"></i>
+      <li><a href="https://instagram.com/${variables.instagram ||
+        "nelcygp23"}" target="_blank"><i class="fa-brands fa-instagram" style="color: #3c6dc3;"></i>
+    </ul>
+  </div>
+`;
 }
 
 /**
@@ -54,11 +60,11 @@ window.onload = function() {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
     // this is the image's url that will be used as a background for the profile cover
-    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    background: "public/assets/fondo.png",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL: "public/assets/img/avatar_nelcy.png",
     // social media bar position (left or right)
-    socialMediaPosition: "position-left",
+    socialMediaPosition: "position-right",
     // social media usernames
     twitter: null,
     github: null,
@@ -75,6 +81,7 @@ window.onload = function() {
   document.querySelectorAll(".picker").forEach(function(elm) {
     elm.addEventListener("change", function(e) {
       // <- add a listener to every input
+
       const attribute = e.target.getAttribute("for"); // when any input changes, collect the value
       let values = {};
       values[attribute] =
